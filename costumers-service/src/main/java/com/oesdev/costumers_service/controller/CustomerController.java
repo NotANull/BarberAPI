@@ -2,6 +2,7 @@ package com.oesdev.costumers_service.controller;
 
 import com.oesdev.costumers_service.dto.CustomerDto;
 import com.oesdev.costumers_service.service.ICustomerService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createCustomer(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<String> createCustomer(@RequestBody @Valid CustomerDto customerDto) {
         return new ResponseEntity<>(this.service.createCostumer(customerDto), HttpStatus.CREATED);
     }
 
@@ -34,8 +35,8 @@ public class CustomerController {
     }
 
     @PatchMapping("/update/{customer_id}")
-    public ResponseEntity<String> updateCustomer(@PathVariable Long customer_id, @RequestBody CustomerDto customerDto) {
-        return new ResponseEntity<>(this.service.updateCostumer(customer_id, customerDto), HttpStatus.CREATED);
+    public ResponseEntity<String> updateCustomer(@PathVariable Long customer_id, @RequestBody @Valid CustomerDto customerDto) {
+        return new ResponseEntity<>(this.service.updateCostumer(customer_id, customerDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{customer_id}")
