@@ -19,5 +19,5 @@ public class Customer {
     private Long customer_id;
     private String name;
     private String lastname;
-    private String telephone;
+    private String phoneNumber;
 }
