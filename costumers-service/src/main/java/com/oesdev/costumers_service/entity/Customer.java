@@ -20,4 +20,5 @@ public class Customer {
     private String name;
     private String lastname;
     private String phoneNumber;
+    private String dni;
 }
