@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.internal.IgnoreForbiddenApisErrors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +29,7 @@ public class CustomerDto {
     private String phoneNumber;
 
     @Size(min = 7, max = 8, message = "DNI must be between 7 and 8 characters")
+    @NotBlank(message = "DNI can't be empty")
     @Pattern(regexp = "\\d{7,8}", message = "DNI must contain only numbers")
     private String dni;
 

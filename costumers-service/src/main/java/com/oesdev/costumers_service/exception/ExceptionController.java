@@ -22,15 +22,17 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-
+    public ResponseEntity<ErrorValidationDto> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
         HashMap<String, String> errors = new HashMap<>();
-
         ex.getFieldErrors().forEach(f -> errors.put(f.getField(), f.getDefaultMessage()));
-
         ErrorValidationDto errorValidation = new ErrorValidationDto(HttpStatus.BAD_REQUEST.value(), errors);
+        return new ResponseEntity<>(errorValidation, HttpStatus.BAD_REQUEST);
+    }
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(CloneException.class)
+    public ResponseEntity<ErrorDto> handleClone(CloneException ex) {
+        ErrorDto error = new ErrorDto(ex.getMessage(), HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().format(DateTimeFormatter.ISO_DATE));
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
 }

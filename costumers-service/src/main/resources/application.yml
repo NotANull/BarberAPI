@@ -14,6 +14,6 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
   datasource:
-    url: jdbc:mysql://localhost:3306/costumers_service?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/customers_service?serverTimezone=UTC
     username: root
     password: 123456789

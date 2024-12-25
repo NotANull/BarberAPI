@@ -2,6 +2,7 @@ package com.oesdev.costumers_service.service;
 
 import com.oesdev.costumers_service.dto.CustomerDto;
 import com.oesdev.costumers_service.entity.Customer;
+import com.oesdev.costumers_service.exception.CloneException;
 import com.oesdev.costumers_service.exception.ResourceNotFoundException;
 import com.oesdev.costumers_service.mapper.ICustomerMapper;
 import com.oesdev.costumers_service.repository.ICustomerRepository;
@@ -20,6 +21,10 @@ public class CustomerServiceImp implements ICustomerService {
 
     @Override
     public String createCostumer(CustomerDto customerDto) {
+
+        if (this.repository.existsByDni(customerDto.getDni())) {
+            throw new CloneException("Client with DNI " + customerDto.getDni() + " has already been created");
+        }
 
         Customer costumer = ICustomerMapper.mapper.toEntity(customerDto);
 
