@@ -15,8 +15,4 @@ public class BarberDto {
     @NotBlank(message = "Name can't be empty")
     private String name;
 
-    @Size(min = 2, max = 30, message = "Lastname must be between 2 and 30 characters")
-    @NotBlank(message = "Lastname can't be empty")
-    private String lastname;
-
 }

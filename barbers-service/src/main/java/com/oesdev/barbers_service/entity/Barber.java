@@ -18,6 +18,5 @@ public class Barber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long barber_id;
     private String name;
-    private String lastname;
 
 }

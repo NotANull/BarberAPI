@@ -1,6 +1,8 @@
 package com.oesdev.barbers_service.service;
 
 import com.oesdev.barbers_service.dto.BarberDto;
+import com.oesdev.barbers_service.entity.Barber;
+import com.oesdev.barbers_service.mapper.IBarberMapper;
 import com.oesdev.barbers_service.repository.IBarberRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +19,27 @@ public class BarberServiceImp implements IBarberService{
 
     @Override
     public String createBarber(BarberDto barberDto) {
-        return "";
+
+        Barber barber = IBarberMapper.mapper.toEntity(barberDto);
+
+        this.repository.save(barber);
+
+        return "Saved Barber!";
     }
 
     @Override
     public BarberDto readBarber(Long barber_id) {
+
+        Barber barber = this.repository.findById(barber_id).orElseThrow(() -> new RuntimeException("Barber not found with id " + barber_id));
+
         return null;
     }
 
     @Override
     public List<BarberDto> readBarbers() {
-        return List.of();
+        return this.repository.findAll().stream()
+                .map(IBarberMapper.mapper::toDto)
+                .toList();
     }
 
     @Override
